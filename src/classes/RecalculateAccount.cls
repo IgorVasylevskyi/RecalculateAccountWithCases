@@ -4,17 +4,20 @@ public with sharing class RecalculateAccount implements Schedulable{
     
     public static String scheduleIt() {
         RecalculateAccount recalc = new RecalculateAccount();
-        return System.schedule('Daily recalculation', CRON_EXP, recalc);
-        //return System.schedule('Daily recalculation', '0 02 * ? * * *', recalc);
+        //return System.schedule('Daily recalculation', CRON_EXP, recalc);
+        return System.schedule('Daily recalculation', '0 13 * ? * * *', recalc);
     }
     
     public void execute(SchedulableContext sc) {
+        RecalculateBatch recalcBatch = new RecalculateBatch();
+        Database.executeBatch(recalcBatch, 100); //Is it normal to decrease quantity of records?
+        
         /*Id supportCustomerRecTypeId = Schema.SObjectType.Case
                 .getRecordTypeInfosByName()
                 .get('Support Customer')
                 .getRecordTypeId();*/
     
-        List<Account>  accountsToUpd = new List<Account>();
+        /*List<Account>  accountsToUpd = new List<Account>();
         
         RecordType rt = [SELECT Id FROM RecordType WHERE Name = 'Support Customer'];
     
@@ -39,6 +42,6 @@ public with sharing class RecalculateAccount implements Schedulable{
         }
         update accountsToUpd;
         
-        System.debug(System.now());
+        System.debug(System.now());*/
     }
 }

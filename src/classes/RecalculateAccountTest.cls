@@ -13,7 +13,8 @@ private class RecalculateAccountTest {
             RecalculateAccount.scheduleIt();
         Test.stopTest();
         
-        Account acc2 = [SELECT Support_Used__c FROM Account WHERE Id = :acc.Id];
+        Account acc2 = [SELECT Name, Support_Used__c FROM Account WHERE Id = :acc.Id];
+        System.debug('acc2: ' + acc2.Support_Used__c + ' ' + acc2.Name);
         System.assertEquals(cases.size(), acc2.Support_Used__c);
     }
     

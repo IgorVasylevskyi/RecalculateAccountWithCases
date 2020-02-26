@@ -5,12 +5,12 @@ public with sharing class RecalculateAccount implements Schedulable{
     public static String scheduleIt() {
         RecalculateAccount recalc = new RecalculateAccount();
         //return System.schedule('Daily recalculation', CRON_EXP, recalc);
-        return System.schedule('Daily recalculation', '0 13 * ? * * *', recalc);
+        return System.schedule('Daily recalculation', '0 27 * ? * * *', recalc);
     }
     
     public void execute(SchedulableContext sc) {
         RecalculateBatch recalcBatch = new RecalculateBatch();
-        Database.executeBatch(recalcBatch, 100); //Is it normal to decrease quantity of records?
+        Database.executeBatch(recalcBatch, 100);
         
         /*Id supportCustomerRecTypeId = Schema.SObjectType.Case
                 .getRecordTypeInfosByName()

@@ -6,7 +6,7 @@ private class RecalculateAccountTest {
     
     @IsTest
     static void testScheduled() {
-        
+        //!!!!!!!!!11Only for scheduled, for batch it should be modified
         Test.startTest();
             Account acc = TestDataRecalculate.addAccountWithRecordType(Date.today());
             List<Case> cases = TestDataRecalculate.addCases(acc.Id, casesQuantity);
